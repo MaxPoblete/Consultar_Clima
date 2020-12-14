@@ -24,7 +24,7 @@ const Clima = ({resultado}) => {
         <Fragment>
         <ContenedorClima>
         <h3 className='text-center'>Resultados</h3><br/>
-            <h4>Temperatura En ciudad de <strong>{name}</strong></h4>
+    <h4>Temperatura En ciudad de <strong>{name}</strong></h4>
             <table className="table table-dark table-striped">
                 <thead>
                 <tr>

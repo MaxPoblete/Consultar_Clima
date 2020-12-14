@@ -14,6 +14,7 @@ import Error from '../components/Error';
     border-radius:5px;
 
 
+
     .input{
         width:100%;
         border-radius:5px;
@@ -40,7 +41,7 @@ const TutiloForm = styled.h3`
 `;
 
 
-const Form = ({busqueda, guardarBusqueda, guardarConsulta}) => {
+const Form = ({busqueda, guardarBusqueda, guardarConsulta, Restablecer, paises}) => {
 
     const {ciudad, pais} = busqueda;
 
@@ -62,7 +63,6 @@ const Form = ({busqueda, guardarBusqueda, guardarConsulta}) => {
             mostrarError(true);
             return;
         }else{
-            console.log(pais);
             if(pais === ""){
                 mostrarError(true);
                 return;
@@ -72,10 +72,11 @@ const Form = ({busqueda, guardarBusqueda, guardarConsulta}) => {
             }
         }
 
-        console.log(pais);
-
     }
 
+
+
+    
     return(
 
         <Fragment>
@@ -84,6 +85,22 @@ const Form = ({busqueda, guardarBusqueda, guardarConsulta}) => {
 
             >
                  <TutiloForm>Ingrese Datos Para Pronostico</TutiloForm><br/>
+                 <label className='label'>Pais</label>
+                <select
+                    name='pais'
+                    value={pais}
+                    id='pais'
+                    onChange={handleChange}
+                    className='input'
+                    
+                >
+                <option value="0">Selecciona Pais</option>
+                    {paises.map(paisItem =>(
+                        <option key={paisItem.index} value={paisItem.alpha2Code}>{paisItem.name}</option>
+                    ))}
+                    
+                </select>
+                <br/>
                 <label className='label'>Ciudad</label>
                 <input 
                     type='text'
@@ -93,28 +110,17 @@ const Form = ({busqueda, guardarBusqueda, guardarConsulta}) => {
                     onChange={handleChange}
                     className='input'
                 />
-                <br/>
-                <label className='label'>Pais</label>
-                <select
-                    name='pais'
-                    value={pais}
-                    id='pais'
-                    onChange={handleChange}
-                    className='input'
-                >
-                    <option value="0">--Selecciona--</option>
-                    <option value="US">Estados Unidos</option>
-                    <option value="MX">Mexico</option>
-                    <option value="AR">Argentina</option>
-                    <option value="CO">Colombia</option>
-                    <option value="CR">Costa Rica</option>
-                    <option value="ES">España</option>
-                    <option value="PE">Peru</option>
-                    <option value="CL">Chile</option>
-
-                </select>
                 <br/><br/>
-                <Boton type='submit'> Buscar</Boton>
+                <div className='row'>
+                    <div className='col-6'>
+                        <Boton type='submit'> Buscar</Boton>
+                    </div>
+                    <div className='col-6'>
+                     <Boton 
+                         onClick={Restablecer}
+                         > Restablecer</Boton>
+                    </div>
+                </div>
             </ContenedorForm>
             {error? <Error mensaje='todos los campos son requeridos'/> : null}
         </Fragment>
